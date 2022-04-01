@@ -1,0 +1,24 @@
+
+# Fuse seth setup
+
+# Look for my key files in a custom directory
+export ETH_KEYSTORE=./keys
+export ETH_PASSWORD=./keys/PASS-55a9
+export ETH_GAS=100000  # must be 1 with 5 zeros to make it happen
+export ETH_GAS_PRICE=1000000000
+
+# our wallet address
+# export ETH_FROM=0x4828699dcbe7d449ce209af47ed285eba9a555a9
+export ETH_FROM=0x4828699dcbe7d449ce209af47ed285eba9a555a9
+
+#export ETH_RPC_URL=https://rpc.fuse.io
+#export ETH_RPC_URL=https://rpc.fusespark.io
+# export ETH_RPC_URL=http://localhost:40477
+
+# network configs
+# export SETH_CHAIN=goerli
+#export ETH_RPC_URL=https://rinkeby.infura.io/v3/17509665a88549b9a5a5f8f3e291120c
+export ETH_RPC_URL=https://rpc.fuse.io/
+#export ETH_RPC_URL=https://goerli.infura.io/v3/17509665a88549b9a5a5f8f3e291120c
+
+

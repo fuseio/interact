@@ -1,0 +1,165 @@
+#!/usr/bin/env bash
+### opt - Multi-collateral Dai
+shopt -s extglob
+
+OPTS="opt [<options>] <command> [<args>]
+opt [<command>] --help
+--
+  Connection options:
+C,chain=chain         chain config - mainnet, kovan, spark, fuse, testnet or a remote testnet id
+
+  Transaction Options:
+F,from=address        account to send from
+G,gas=number          number of gas units to provide
+async                 don't wait for tx receipts
+
+  opt options:
+I,ilk=string          ilk identifier
+U,urn=string          urn identifier
+
+  Filter options:
+B,block=number        from block
+  Other Options:
+
+J,config=file         custom deployment address file (json)
+
+Remmeber that for FUSE, ETH_GAS must be 100000 and ETH_GAS_PRICE 1000000000
+"
+
+set -e
+
+# Setup seth in case $ETH_INIT=0
+if ! [[ $SETH_INIT ]]; then
+  export SETH_INIT=1
+  [[ -e ~/.sethrc ]] && . ~/.sethrc
+fi
+
+# Print help
+if [[ $2 = --help ]]; then
+  exec "${0##*/}" help -- "$1"
+elif [[ $1 == testnet ]]; then
+  exec "${0##*/}-testnet" "${@:2}"
+elif [[ $1 = -* ]] && command -v "${0##*/}-$1" &>/dev/null; then
+  exec "${0##*/}-$1" "${@:2}"
+fi
+
+eval "$(git rev-parse --parseopt -- "$@" <<<"$OPTS" || echo exit $?)"
+
+while [[ $1 ]]; do
+  case $1 in
+    --)             shift; break;;
+
+    -C|--chain)     shift; export NET_CHAIN=$1;;
+    -J|--config)    shift; export opt_CONFIG=$1;;
+
+    -I|--gas_price) shift; export ETH_GAS_PRICE=$1;;
+
+    -B|--block)     shift; export ETH_BLOCK=$1;;
+
+    -F|--from)      shift; export ETH_FROM=$1;;
+    -G|--gas)       shift; export ETH_GAS=$1;;
+
+       --async)            export SETH_ASYNC=yes;;
+
+    *) printf "${0##*/}: unrecognised option: %q\n" "--$1"; exit 1
+  esac; shift
+done
+
+testnet-init() {
+  dir="$TESTNET/tmp/$1"
+  conf="$dir/conf.json";
+
+  if [[ ! -d "$dir" ]]; then
+    json=$(opt testnet chain "${1}" | jq '.')
+    if [[ "$json" == "null" ]]; then
+      echo "Error: chain config not found for $1"
+      exit 1
+    else
+      mkdir -p "$dir"; echo "$json" > "$conf"
+      pk=$(cat "$conf" | jq -r .chain_details.accounts[0].priv_key)
+      geth --datadir="$dir" --password=/dev/null \
+           account import <(echo "$pk") &>/dev/null
+    fi
+  fi
+  config-init $conf;
+}
+
+config-init() {
+  path=${opt_CONFIG:-$1}
+  if [[ ! -e "$path" ]]; then
+    echo "Config file not found: $path not found"
+    exit 1
+  fi
+  exports=$(cat $path | jq -r ".deploy_data // . | \
+    to_entries|map(\"\(.key)=\(.value|tostring)\")|.[]")
+  for e in $exports; do export "$e"; done
+}
+
+rpc-verify() {
+  if test -z "$ETH_RPC_URL"
+  then
+    echo "Please set the ETH_RPC_URL to an ethereum endpoint."
+    exit 1
+  fi
+}
+
+chain-verify() {
+  EXPECTED="$1"
+  ACTUAL="$(seth rpc net_version)"
+  if [ "$EXPECTED" != "$ACTUAL" ]; then
+    echo "Ethereum network version is incorrect."
+    echo "Verify ETH_RPC_URL is set to $opt_CHAIN (Expected $EXPECTED, got $ACTUAL)"
+    exit 1
+  fi
+}
+
+opt-init() {
+  # If opt_CHAIN is unset but SETH_CHAIN is, set to SETH_CHAIN
+  if [ -z "$opt_CHAIN" ]; then opt_CHAIN="$SETH_CHAIN"; fi
+
+  case "$opt_CHAIN" in
+    mainnet)
+      config-init "${0%/*}/conf/mainnet.json";
+      export SETH_CHAIN=mainnet
+      rpc-verify
+      chain-verify "1"
+      ;;
+    kovan)
+      config-init "${0%/*}/conf/kovan.json";
+      export SETH_CHAIN=kovan
+      rpc-verify
+      chain-verify "42"
+      ;;
+    testnet) # local dapp testnet
+      config-init "${opt_CONFIG:-$TESTNET/8545/config/addresses.json}"
+      export ETH_RPC_URL="${ETH_RPC_URL:-http://127.0.0.1:8545}"
+      export ETH_LOGS_API="${ETH_LOGS_API:-rpc}"
+      export ETH_KEYSTORE="${ETH_KEYSTORE:-$TESTNET/8545/keystore}"
+      export ETH_PASSWORD="${ETH_PASSWORD:-/dev/null}"
+      from="$(seth accounts ls | sed 1q | awk '{print substr ($0, 0, 42)}')"
+      export ETH_FROM="${ETH_FROM:-$from}"
+      ;;
+    +([0-9])) # remote testnet id
+      testnet-init "$opt_CHAIN"
+      export ETH_RPC_URL=${ETH_RPC_URL:-$(cat $path | jq -r .chain_details.rpc_url)}
+      export ETH_LOGS_API=${ETH_LOGS_API:-rpc}
+      export ETH_KEYSTORE=${ETH_KEYSTORE:-$TESTNET/tmp/$opt_CHAIN/keystore}
+      export ETH_PASSWORD=${ETH_PASSWORD:-/dev/null}
+      export ETH_FROM=${ETH_FROM:-$(cat $path | jq -r .chain_details.coinbase)}
+      ;;
+    *)
+      if [[ "$@" != *"help"* ]]; then
+        echo "Warning: \`--chain' option not specified. Defaulting to kovan"
+        config-init "${0%/*}/conf/kovan.json";
+        export SETH_CHAIN=kovan
+      fi
+  esac
+}
+
+if ! [[ $opt_INIT ]]; then
+  TESTNET="${TESTNET:-~/.dapp/testnet}"
+  export opt_INIT=1
+  opt-init
+fi
+
+"${0##*/}-${1-help}" "${@:2}"

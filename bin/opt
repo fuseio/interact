@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Helper to run the main script with the sub-scripts as arguments
+# You can point this file to your path or use the installer [TODO]
+set -e
+# collect the directory path of a sub-script file
+SCRIPT_PATH="$( cd "$(dirname "$0")" ; pwd -P )"
+# collect the full path of the sub-scripts
+BIN_PATH="$(dirname $SCRIPT_PATH)/exec/opt"
+# add this executable to the path with its remaining args
+PATH=$BIN_PATH:$PATH opt "$@"
