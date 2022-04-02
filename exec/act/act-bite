@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+### mcd-bite -- Trigger liquidation of an unsafe Urn
+### Usage: mcd bite --ilk=<id> --urn=<address>
+###
+### Specify the Ilk identifier and Urn address to bite.
+set -e
+
+export ETH_GAS="${ETH_GAS:-750000}"
+
+echo "bite example"

@@ -34,6 +34,15 @@ if ! [[ $SETH_INIT ]]; then
   [[ -e ~/.sethrc ]] && . ~/.sethrc
 fi
 
+# Load environment with sensible data
+if [ -f .env ]
+then
+  export $(cat .env | xargs)
+else
+  echo "Please, add a .env as described in the README file"
+  exit 1
+fi
+
 # Print help
 if [[ $2 = --help ]]; then
   exec "${0##*/}" help -- "$1"
@@ -49,7 +58,7 @@ while [[ $1 ]]; do
   case $1 in
     --)             shift; break;;
 
-    -C|--chain)     shift; export NET_CHAIN=$1;;
+    -C|--chain)     shift; export ACT_CHAIN=$1;;
     -J|--config)    shift; export ACT_CONFIG=$1;;
 
     -I|--gas_price) shift; export ETH_GAS_PRICE=$1;;
@@ -121,6 +130,8 @@ act-init() {
     mainnet)
       config-init "${0%/*}/conf/mainnet.json";
       export SETH_CHAIN=mainnet
+      # export ETH_RPC_URL=$NET_ETH_MAINET
+      export ETH_RPC_URL=https://mainnet.infura.io/v3/17509665a88549b9a5a5f8f3e291120c
       rpc-verify
       chain-verify "1"
       ;;

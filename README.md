@@ -22,6 +22,19 @@ export ETH_KEYSTORE="/home/user/.ethereum/keystore"
 export ETH_RPC_URL="https://kovan.infura.io/v3/c928d...."
 ```
 
+You must add all your sensible information in the .env file like this below, wihtout comments:
+
+```
+NET_ARCHIVE_NODE_URL=https://api.archivenode.io/0e60a...
+NET_ETH_GOER=https://goerli.infura.io/v3/17509....
+NET_ETH_RINKEBY=https://rinkeby.infura.io/v3/175...
+NET_ETH_MAINET=https://mainnet.infura.io/v3/175...
+NET_ETH_KOVAN=https://kovan.infura.io/v3/175...
+NET_FUSE_MAIN=https://rpc.fuse.io
+NET_FUSE_SPARK=https://rpc.fusespark.io
+NET_OPT_GOER=https://goerli.optimism.io/
+```
+
 #### Kovan
 
 Run against the latest Kovan deployment by setting the `-C, --chain` option to `kovan`. Specify a sender account when sending transactions using the `-F, --from` option, or via the `ETH_FROM` env variable.

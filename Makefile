@@ -7,6 +7,8 @@ fuzz   :; dapp --use solc:$(SOLC_VERSION) test --fuzz-runs 100
 deploy :; dapp --use solc:$(SOLC_VERSION) create Mutual
 debug  :; dapp --use solc:$(SOLC_VERSION) debug 
 
+install:
+	source install
 
 GAS=10000000
 
