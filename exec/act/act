@@ -165,6 +165,15 @@ act-init() {
       rpc-verify
       chain-verify "420"
       ;;
+    optimism-local)
+      config-init "${0%/*}/conf/optimism-goerli.json";
+      export ETH_RPC_URL=http://127.0.0.1:8545
+      export ETH_KEYSTORE=./keys
+      export ETH_GAS=1000000
+      export ETH_GAS_PRICE=1
+      rpc-verify
+      chain-verify "987"
+      ;;
     testnet) # local dapp testnet
       config-init "${ACT_CONFIG:-$TESTNET/8545/config/addresses.json}"
       export ETH_RPC_URL="${ETH_RPC_URL:-http://127.0.0.1:8545}"

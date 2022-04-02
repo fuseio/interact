@@ -7,8 +7,25 @@ fuzz   :; dapp --use solc:$(SOLC_VERSION) test --fuzz-runs 100
 deploy :; dapp --use solc:$(SOLC_VERSION) create Mutual
 debug  :; dapp --use solc:$(SOLC_VERSION) debug 
 
-install:
-	source install
+# Load sensible environment variables
+include .env
+export
+
+
+# create a new template for an interaction
+# usage: make new name=example
+new:
+	@echo "#!/usr/bin/env bash\nset -e" > ./exec/act/act-$(name)
+	chmod 777 ./exec/act/act-$(name)
+
+check:
+	@echo "Printing configs from .env file"
+	@echo $(NET_ETH_GOER)
+	@echo $(NET_ETH_RINKEBY)
+	@echo $(NET_ETH_MAINET)
+	@echo $(NET_ETH_KOVAN)
+	@echo $(NET_FUSE_MAIN)
+	@echo $(NET_FUSE_SPARK)
 
 GAS=10000000
 
@@ -72,8 +89,9 @@ inspect:
 	ethkey inspect --private keys/keystore-55a9
 
 # private key -> UTC keystore
+# exclude the 0x when adding the private key
 import:
-	ethsign import
+	ethsign import --key-store .
 
 # BALANCES
 balance:

@@ -3,4 +3,5 @@ set -e
 
 export ETH_GAS="${ETH_GAS:-750000}"
 
-echo "bite example"
+
+dapp create Dapp
