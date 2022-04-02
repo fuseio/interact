@@ -130,16 +130,40 @@ act-init() {
     mainnet)
       config-init "${0%/*}/conf/mainnet.json";
       export SETH_CHAIN=mainnet
-      # export ETH_RPC_URL=$NET_ETH_MAINET
-      export ETH_RPC_URL=https://mainnet.infura.io/v3/17509665a88549b9a5a5f8f3e291120c
+      export ETH_RPC_URL=$NET_ETH_MAINET
       rpc-verify
       chain-verify "1"
       ;;
     kovan)
       config-init "${0%/*}/conf/kovan.json";
       export SETH_CHAIN=kovan
+      export ETH_RPC_URL=$NET_ETH_KOVAN
       rpc-verify
       chain-verify "42"
+      ;;
+    fuse)
+      config-init "${0%/*}/conf/fuse.json";
+      export ETH_RPC_URL=$NET_FUSE_MAIN
+      rpc-verify
+      chain-verify "122"
+      ;;
+    spark)
+      config-init "${0%/*}/conf/spark.json";
+      export ETH_RPC_URL=$NET_FUSE_SPARK
+      rpc-verify
+      chain-verify "123"
+      ;;
+    optimism)
+      config-init "${0%/*}/conf/optimism-main.json";
+      export ETH_RPC_URL=$NET_OPTIMISM_MAIN
+      rpc-verify
+      chain-verify "10"
+      ;;
+    optimism-goerli)
+      config-init "${0%/*}/conf/optimism-goerli.json";
+      export ETH_RPC_URL=$NET_OPTIMISM_GOER
+      rpc-verify
+      chain-verify "420"
       ;;
     testnet) # local dapp testnet
       config-init "${ACT_CONFIG:-$TESTNET/8545/config/addresses.json}"
