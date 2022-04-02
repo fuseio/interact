@@ -5,6 +5,6 @@ set -e
 # collect the directory path of a sub-script file
 SCRIPT_PATH="$( cd "$(dirname "$0")" ; pwd -P )"
 # collect the full path of the sub-scripts
-BIN_PATH="$(dirname $SCRIPT_PATH)/exec/opt"
+BIN_PATH="$(dirname $SCRIPT_PATH)/exec/act"
 # add this executable to the path with its remaining args
-PATH=$BIN_PATH:$PATH opt "$@"
+PATH=$BIN_PATH:$PATH act "$@"
