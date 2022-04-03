@@ -79,7 +79,6 @@ faucet:
 send-spark:
 	seth send --value 1000 --gas-price=1000000000 --gas=14000000 0x0cde80AD77Ab131510036A72b012a4A0F26C2ACC
 
-
 # collect address and names from hardhat deployments
 collect-addresses:
 	for f in *.json; do echo \"$f\": && cat $f | jq '.address' && echo ","; done

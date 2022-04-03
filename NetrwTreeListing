@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-set -e
-
-export ETH_GAS="${ETH_GAS:-750000}"
-
-
-dapp create Dapp

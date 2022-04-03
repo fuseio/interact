@@ -2,3 +2,36 @@
 # TODO: a full installation like:
 # https://github.com/makerdao/mcd-cli/blob/master/install.sh
 export PATH=$PATH:/`pwd`/bin
+
+# Load environment with sensible data
+if [ -f .env ]
+then
+  export $(cat .env | xargs)
+else
+  echo "Please, add a .env as described in the README file"
+  exit 1
+fi
+
+
+# Use these functions to switch the seth environment
+
+function kovan() {
+  export ETH_RPC_URL=$NET_FUSE_MAIN
+  export ETH_=kovan
+}
+
+function testnet-local() {
+  export ETH_RPC_URL=http://127.0.0.1:9545
+  export ETH_KEYSTORE=./keys
+  export ETH_GAS=10000000
+  export ETH_GAS_PRICE=1
+  export ETH_PASSWORD=./keys/PASS-2266
+}
+
+function optimism-local() {
+  export ETH_RPC_URL=http://127.0.0.1:8545
+  export ETH_KEYSTORE=./keys
+  export ETH_GAS=10000000
+  export ETH_GAS_PRICE=1
+  export ETH_PASSWORD=./keys/PASS-2266
+}

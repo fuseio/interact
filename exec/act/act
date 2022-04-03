@@ -34,7 +34,7 @@ if ! [[ $SETH_INIT ]]; then
   [[ -e ~/.sethrc ]] && . ~/.sethrc
 fi
 
-# Load environment with sensible data
+# Load environment with sensible data to be used in the context here
 if [ -f .env ]
 then
   export $(cat .env | xargs)
@@ -166,13 +166,22 @@ act-init() {
       chain-verify "420"
       ;;
     optimism-local)
-      config-init "${0%/*}/conf/optimism-goerli.json";
+      config-init "${0%/*}/conf/optimism-local.json";
       export ETH_RPC_URL=http://127.0.0.1:8545
       export ETH_KEYSTORE=./keys
       export ETH_GAS=1000000
       export ETH_GAS_PRICE=1
       rpc-verify
       chain-verify "987"
+      ;;
+    local)
+      config-init "${0%/*}/conf/optimism-local.json";
+      export ETH_RPC_URL=http://127.0.0.1:9545
+      export ETH_KEYSTORE=./keys
+      export ETH_GAS=1000000
+      export ETH_GAS_PRICE=1
+      rpc-verify
+      chain-verify "31337"
       ;;
     testnet) # local dapp testnet
       config-init "${ACT_CONFIG:-$TESTNET/8545/config/addresses.json}"
