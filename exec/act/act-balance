@@ -2,8 +2,8 @@
 set -e
 
 
-echo "Deployer"
-seth balance $Deployer
+# echo "Deployer"
+# seth balance $Deployer
 
 echo "Deployer2"
-seth balance $Deployer2
+seth balance $Deployer2 | seth --from-wei
