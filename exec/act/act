@@ -134,14 +134,36 @@ act-init() {
       rpc-verify
       chain-verify "1"
       ;;
+    main-l2)
+      config-init "${0%/*}/conf/mainnet.json";
+      export ETH_RPC_URL=$NET_OPTIMISM_MAIN
+      rpc-verify
+      chain-verify "10"
+      ;;
     kovan)
       config-init "${0%/*}/conf/kovan.json";
       export SETH_CHAIN=kovan
       export ETH_RPC_URL=$NET_ETH_KOVAN
+      export ETH_KEYSTORE=./keys
+      export ETH_PASSWORD=./keys/PASS-55a9
+      export ETH_GAS_PRICE=2500000000
+      export ETH_GAS=10000000
       rpc-verify
       chain-verify "42"
       ;;
+    kovan-l2)
+      config-init "${0%/*}/conf/kovan.json";
+      export ETH_RPC_URL=$NET_OPTIMISM_KOVAN
+      rpc-verify
+      chain-verify "69"
+      ;;
     fuse)
+      config-init "${0%/*}/conf/fuse.json";
+      export ETH_RPC_URL=$NET_FUSE_MAIN
+      rpc-verify
+      chain-verify "122"
+      ;;
+    fuse-l2)
       config-init "${0%/*}/conf/fuse.json";
       export ETH_RPC_URL=$NET_FUSE_MAIN
       rpc-verify
@@ -153,35 +175,41 @@ act-init() {
       rpc-verify
       chain-verify "123"
       ;;
-    optimism)
-      config-init "${0%/*}/conf/optimism-main.json";
-      export ETH_RPC_URL=$NET_OPTIMISM_MAIN
+    spark-l2)
+      config-init "${0%/*}/conf/spark.json";
+      export ETH_RPC_URL=$NET_FUSE_SPARK
       rpc-verify
-      chain-verify "10"
+      chain-verify "123"
       ;;
-    optimism-goerli)
-      config-init "${0%/*}/conf/optimism-goerli.json";
+    goerli)
+      config-init "${0%/*}/conf/goerli.json";
       export ETH_RPC_URL=$NET_OPTIMISM_GOER
       rpc-verify
       chain-verify "420"
       ;;
-    optimism-local)
-      config-init "${0%/*}/conf/optimism-local.json";
-      export ETH_RPC_URL=http://127.0.0.1:8545
-      export ETH_KEYSTORE=./keys
-      export ETH_GAS=1000000
-      export ETH_GAS_PRICE=1
+    goerli-l2)
+      config-init "${0%/*}/conf/goerli.json";
+      export ETH_RPC_URL=$NET_OPTIMISM_GOER
       rpc-verify
-      chain-verify "987"
+      chain-verify "420"
       ;;
-    local)
-      config-init "${0%/*}/conf/optimism-local.json";
+    local-l1)
+      config-init "${0%/*}/conf/local.json";
       export ETH_RPC_URL=http://127.0.0.1:9545
       export ETH_KEYSTORE=./keys
       export ETH_GAS=1000000
       export ETH_GAS_PRICE=1
       rpc-verify
       chain-verify "31337"
+      ;;
+    local-l2)
+      config-init "${0%/*}/conf/local.json";
+      export ETH_RPC_URL=http://127.0.0.1:8545
+      export ETH_KEYSTORE=./keys
+      export ETH_GAS=1000000
+      export ETH_GAS_PRICE=1
+      rpc-verify
+      chain-verify "987"
       ;;
     testnet) # local dapp testnet
       config-init "${ACT_CONFIG:-$TESTNET/8545/config/addresses.json}"

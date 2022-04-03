@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -e
+
+
+seth balance $Deployer2
+#    MIN_ROLLUP_TX_GAS = 100000;
+#    /**
+#     * @dev Performs the logic for deposits by storing the ETH and informing the L2 ETH Gateway of
+#     * the deposit.
+#     * @param _from Account to pull the deposit from on L1.
+#     * @param _to Account to give the deposit to on L2.
+#     * @param _l2Gas Gas limit required to complete the deposit on L2.
+#     * @param _data Optional data to forward to L2. This data is provided
+#     *        solely as a convenience for external contracts. Aside from 
+#     *        enforcing a maximum
+#     *        length, these contracts provide no guarantees about its content.
+#     */
+# code: L1/messaging/L1StandardBridge.sol [line 108]
+# func: depositETH(uint32 _l2Gas, bytes calldata _data) external payable;
+# func: function _initiateETHDeposit(address _from, address _to, uint32 _l2Gas, bytes memory _data
+# I added 150000, once the minimum is 100000
+seth send $Proxy__OVM_L1StandardBridge \
+  --value $(seth --to-wei 0.0000000000000123 eth)  \
+  --from $Deployer2 \
+  "depositETH(uint32,bytes)" "150000" $(seth --to-bytes32 "5")

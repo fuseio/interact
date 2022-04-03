@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -e
+
+
+echo "Deployer"
+seth balance $Deployer
+
+echo "Deployer2"
+seth balance $Deployer2

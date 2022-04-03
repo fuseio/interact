@@ -14,10 +14,20 @@ fi
 
 
 # Use these functions to switch the seth environment
+function kovan() {
+  export ETH_RPC_URL=$NET_ETH_MAINET
+  export ETH_KEYSTORE=./keys
+  export ETH_GAS=10000000
+  export ETH_GAS_PRICE=1
+  export ETH_PASSWORD=./keys/PASS-ALL
+}
 
 function kovan() {
-  export ETH_RPC_URL=$NET_FUSE_MAIN
-  export ETH_=kovan
+  export ETH_RPC_URL=$NET_ETH_KOVAN
+  export ETH_KEYSTORE=./keys
+  export ETH_GAS=10000000
+  export ETH_GAS_PRICE=1
+  export ETH_PASSWORD=./keys/PASS-ALL
 }
 
 function testnet-local() {
@@ -25,7 +35,7 @@ function testnet-local() {
   export ETH_KEYSTORE=./keys
   export ETH_GAS=10000000
   export ETH_GAS_PRICE=1
-  export ETH_PASSWORD=./keys/PASS-2266
+  export ETH_PASSWORD=./keys/PASS-ALL
 }
 
 function optimism-local() {
@@ -33,5 +43,5 @@ function optimism-local() {
   export ETH_KEYSTORE=./keys
   export ETH_GAS=10000000
   export ETH_GAS_PRICE=1
-  export ETH_PASSWORD=./keys/PASS-2266
+  export ETH_PASSWORD=./keys/PASS-ALL
 }

@@ -1,6 +1,15 @@
 Optimism Interactions
 =====================
 
+## Todos
+
+```
+[ ] - [examples](https://github.com/ethereum-optimism/optimism-tutorial) on local [docker-compose], with saving logs and 'what happened' descriptions
+[ ] - [examples](https://github.com/ethereum-optimism/optimism-tutorial) on local [starting manually with scripts]
+[ ] - interact with kovan
+[ ] - start L2 + DTL locally connected with FUSE in production
+[ ] - deployment of optimism [examples](https://github.com/ethereum-optimism/optimism-tutorial) on fuse [starting manually with scripts]
+```
 
 
 ## Configuration
@@ -105,6 +114,24 @@ Private Key: 0xdf57089febbacf7ba0bc227dafbffa9fc08a93fdc68e1e42411a14efcf23656e
 
 ```
 
+
+
+## L2 Geth - Pre-deployed addresses
+
+
+```
+L2_TO_L1_MESSAGE_PASSER   = 0x4200000000000000000000000000000000000000;
+L1_MESSAGE_SENDER         = 0x4200000000000000000000000000000000000001;
+DEPLOYER_WHITELIST        = 0x4200000000000000000000000000000000000002;
+OVM_ETH                   = payable(0xDeadDeAddeAddEAddeadDEaDDEAdDeaDDeAD0000);
+L2_CROSS_DOMAIN_MESSENGER = 0x4200000000000000000000000000000000000007;
+LIB_ADDRESS_MANAGER       = 0x4200000000000000000000000000000000000008;
+PROXY_EOA                 = 0x4200000000000000000000000000000000000009;
+L2_STANDARD_BRIDGE        = 0x4200000000000000000000000000000000000010;
+SEQUENCER_FEE_WALLET      = 0x4200000000000000000000000000000000000011;
+L2_STANDARD_TOKEN_FACTORY = 0x4200000000000000000000000000000000000012;
+L1_BLOCK_NUMBER           = 0x4200000000000000000000000000000000000013;
+```
 
 #### Kovan
 

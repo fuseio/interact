@@ -1,4 +1,6 @@
 {
+  "Deployer" : "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
+  "Deployer2" : "0x4828699dcbe7d449ce209af47ed285eba9a555a9",
   "AddressDictator": "0x8676275c08626263c60282A26550464DFa19ABd6",
   "BondManager": "0xc5a603d273E28185c18Ba4d26A0024B2d2F42740",
   "CanonicalTransactionChain": "0xf7B88A133202d41Fe5E2Ab22e6309a1A4D50AF74",
