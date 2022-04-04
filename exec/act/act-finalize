@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -e
+
+
+
+# To finalize the bridge L2 -> L1, we need to call 'finalizeETHWithdrawal', that has
+# two versions, one for ETH and another for ERC20, 'finalizeERC20Withdrawal'. 
+# Lets use for ETH.
+    # function finalizeETHWithdrawal(
+    #     address _from,
+    #     address _to,
+    #     uint256 _amount,
+    #     bytes calldata _data
+
+seth call $Proxy__OVM_L1StandardBridge "l2TokenBridge()(address)"
+
+seth send $Proxy__OVM_L1StandardBridge\
+  --from $Deployer2 \
+  "finalizeDeposit(address,address,uint256,bytes)" "0x4200000000000000000000000000000000000010" $Deployer2 "100" $(seth --to-bytes32 "5")
