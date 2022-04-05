@@ -100,6 +100,12 @@ withdrawETH took 448.947 seconds
 
 ```
 
+
+## Finalize Flow
+
+
+![finalize](./finalize.png)
+
 ## Tutorial Code
 
 ```typescript
