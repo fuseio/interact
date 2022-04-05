@@ -103,6 +103,19 @@ withdrawETH took 448.947 seconds
 
 ## Finalize Flow
 
+```
+[55a9] Deployer2  
+[83fd] Proxy__OVM_L1CrossDomainMessenger 
+[df3a] Lib_AddressManager 
+[654d] OVM_L1CrossDomainMessenger 
+[53c5] StateCommitmentChain 
+[33e8] ChainStorageContainer_SCC_batches
+[982b] Proxy__OVM_L1StandardBridge
+[413d] ?
+[a033] ?
+
+```
+
 
 ![finalize](./finalize.png)
 
