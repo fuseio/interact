@@ -112,7 +112,10 @@ withdrawETH took 448.947 seconds
 [33e8] ChainStorageContainer_SCC_batches
 [982b] Proxy__OVM_L1StandardBridge
 [413d] ?
-[a033] ?
+[a033] L1StandardBridge [was deployed manually by someone outside the repos]
+
+
+https://dashboard.tenderly.co/contract/kovan/0x92ee5187a8ec035e22ea5135510d01bd11d6a033
 
 ```
 

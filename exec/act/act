@@ -197,7 +197,7 @@ act-init() {
       rpc-verify
       chain-verify "420"
       ;;
-    local-l1)
+    local)
       config-init "${0%/*}/conf/local.json";
       export ETH_RPC_URL=http://127.0.0.1:9545
       export ETH_KEYSTORE=./keys
