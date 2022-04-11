@@ -1,5 +1,6 @@
 {
   "BondManager": "0xE5AE60bD6F8DEe4D0c2BC9268e23B92F1cacC58F",
+  "Deployer2" : "0x4828699dcbe7d449ce209af47ed285eba9a555a9",
   "CanonicalTransactionChain": "0x2ebA8c4EfDB39A8Cd8f9eD65c50ec079f7CEBD81",
   "ChainStorageContainer_CTC_batches": "0x0821Ff73FD88bb73E90F2Ea459B57430dff731Dd",
   "ChainStorageContainer_CTC_queue": "0xf96dc01589969B85e27017F1bC449CB981eED9C8",

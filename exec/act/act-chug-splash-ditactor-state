@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -e
+
+
+
+echo "target"
+seth call $ChugSplashDictator "target()(address)"
+echo "codeHash"
+seth call $ChugSplashDictator "codeHash()(bytes32)"
+echo "bridgeSlotKey"
+seth call $ChugSplashDictator "bridgeSlotKey()(bytes32)"
+echo "bridgeSlotVal"
+seth call $ChugSplashDictator "bridgeSlotVal()(bytes32)"
+echo "finalOwner"
+seth call $ChugSplashDictator "finalOwner()(address)"

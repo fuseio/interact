@@ -164,6 +164,8 @@ act-init() {
     fuse)
       config-init "${0%/*}/conf/fuse.json";
       export ETH_RPC_URL=$NET_FUSE_MAIN
+      export ETH_GAS=1000000
+      export ETH_KEYSTORE=./keys
       rpc-verify
       chain-verify "122"
       ;;
@@ -171,7 +173,7 @@ act-init() {
       config-init "${0%/*}/conf/fuse.json";
       export ETH_RPC_URL=$NET_FUSE_MAIN
       rpc-verify
-      chain-verify "122"
+      chain-verify "125"
       ;;
     spark)
       config-init "${0%/*}/conf/spark.json";
@@ -213,7 +215,7 @@ act-init() {
       export ETH_GAS=1000000
       export ETH_GAS_PRICE=1
       rpc-verify
-      chain-verify "987"
+      chain-verify "1"
       ;;
     testnet) # local dapp testnet
       config-init "${ACT_CONFIG:-$TESTNET/8545/config/addresses.json}"

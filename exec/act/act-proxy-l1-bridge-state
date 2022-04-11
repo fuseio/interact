@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -e
+
+
+echo "getOwner()"
+seth call $Proxy__OVM_L1StandardBridge "getOwner()(address)"
+
+
+echo "getImplementation()"
+seth call $Proxy__OVM_L1StandardBridge "getImplementation()(address)"
