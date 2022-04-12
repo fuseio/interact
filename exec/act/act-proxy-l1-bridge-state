@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -e
 
+# This contract is the L1ChugSplashProxy in the contract name
+# This contract is the Proxy__OVM_L1StandardBridge in the deployed name
+# This contract is the L1StandardBridge in the public name
+# This contract name is a big mess
 
 echo "getOwner()"
 seth call $Proxy__OVM_L1StandardBridge "getOwner()(address)"

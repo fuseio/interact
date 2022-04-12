@@ -4,6 +4,8 @@ set -e
 # after researching inside the ChugSplashDictator, I found that the target there is the 
 # Proxy__OVM_L1StandardBridge, that in fact is a proxy to the L1ChugSplashProxy
 # https://kovan.etherscan.io/address/0x22F24361D548e5FaAfb36d1437839f080363982B#code
+# Checking the file history, seems that the deployer wallet called the setCode:
+# https://kovan.etherscan.io/tx/0x823805c807f1abacc2d9d06a09e65365506e9e2cbef5d20b8c0b2ec86578099b
 
 
 export ETH_FROM=$Deployer2
