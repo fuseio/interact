@@ -101,6 +101,16 @@ remote-debug:
 		--address 0x5d9c15e68048e480e2d1396fba888cc050843376 \
 		--solver cvc4 --debug --json-file ./out/dapp.sol.json
 
+run-tx:
+	hevm exec \
+     --caller $(seth tx $TXHASH from) \
+     --address $(seth tx $TXHASH to) \
+     --calldata $(seth tx $TXHASH input) \
+     --rpc $ETH_RPC_URL \
+     --block $(($(seth tx $TXHASH blockNumber)-1)) \
+     --gas $(seth tx $TXHASH gas) \
+     --debug
+
 check-trace:
 	curl --location --request POST 'https://explorer-node.fuse.io/' \
 		--header 'Content-Type: application/json' \

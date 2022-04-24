@@ -13,6 +13,17 @@ else
 fi
 
 
+function debug() {
+	hevm exec \
+     --caller $(seth tx $1 from) \
+     --address $(seth tx $1 to) \
+     --calldata $(seth tx $1 input) \
+     --rpc $ETH_RPC_URL \
+     --block $(($(seth tx $1 blockNumber)-1)) \
+     --gas $(seth tx $1 gas) \
+     --debug
+}
+
 # Use these functions to switch the seth environment
 function fuse() {
   export ETH_RPC_URL=https://rpc.fuse.io
