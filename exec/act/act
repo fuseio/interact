@@ -171,7 +171,11 @@ act-init() {
       ;;
     fuse-l2)
       config-init "${0%/*}/conf/fuse.json";
-      export ETH_RPC_URL=$NET_FUSE_MAIN
+      export ETH_RPC_URL=http://127.0.0.1:8545
+      export ETH_KEYSTORE=./keys
+      export ETH_PASSWORD=./keys/PASS-55a9
+      export ETH_GAS=1000
+      export ETH_GAS_PRICE=1000000
       rpc-verify
       chain-verify "125"
       ;;

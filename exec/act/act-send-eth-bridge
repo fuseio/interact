@@ -20,6 +20,6 @@ seth balance $Deployer2
 # func: function _initiateETHDeposit(address _from, address _to, uint32 _l2Gas, bytes memory _data
 # I added 150000, once the minimum is 100000
 seth send $Proxy__OVM_L1StandardBridge \
-  --value $(seth --to-wei 0.00000000001 eth)  \
+  --value $(seth --to-wei 0.0000000000001 eth)  \
   --from $Deployer2 \
   "depositETH(uint32,bytes)" "150000" $(seth --to-bytes32 "5")
