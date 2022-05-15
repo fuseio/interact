@@ -1,0 +1,19 @@
+
+# to use: 'mv env-example to .env'
+
+NET_ARCHIVE_NODE_URL=https://api.archivenode.io/____
+
+NET_ETH_GOER=https://goerli.infura.io/v3/____
+NET_ETH_RINKEBY=https://rinkeby.infura.io/v3/___
+NET_ETH_MAINET=https://mainnet.infura.io/v3/___
+NET_ETH_KOVAN=https://kovan.infura.io/v3/___
+
+NET_FUSE_MAIN=https://rpc.fuse.io
+NET_FUSE_ARCHIVE=https://explorer-node.fuse.io
+NET_FUSE_SPARK=https://rpc.fusespark.io
+
+NET_OPTIMISM_MAIN=https://mainnet.optimism.io/
+NET_OPTIMISM_GOER=https://goerli.optimism.io/
+NET_OPTIMISM_KOVAN=https://kovan.optimism.io/
+
+PRIV_KEY=0x____
